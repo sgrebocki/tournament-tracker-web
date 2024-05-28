@@ -1,0 +1,27 @@
+.tournament-view {
+    background-color: #2e2e2e;
+    color: #f5f5f5;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .tournament-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .tournament-table th,
+  .tournament-table td {
+    border: 1px solid #555;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .tournament-table th {
+    background-color: #3a3a3a;
+  }
+  
+  .tournament-table tr:nth-child(even) {
+    background-color: #4a4a4a;
+  }
