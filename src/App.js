@@ -1,16 +1,21 @@
 import React from 'react';
-import Header from './components/Header';
-import TournamentView from './views/TournamentView';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/header/Header';
+import TournamentView from './views/tournament/TournamentView';
+import TournamentDetailView from './views/tournament/TournamentDetailView';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div id="home">
-        <TournamentView />
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<TournamentView />} />
+          <Route path="/tournament/:id" element={<TournamentDetailView />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
