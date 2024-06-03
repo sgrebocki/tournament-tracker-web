@@ -4,7 +4,7 @@ import { fetchTournaments, fetchSports, createTournament } from '../../api/tourn
 import CreateTournamentModal from '../../components/modal/CreateTournamentModal';
 import './TournamentView.css';
 
-const TournamentView = () => {
+const TournamentView = ({ token }) => {
   const [tournaments, setTournaments] = useState([]);
   const [sports, setSports] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -59,15 +59,15 @@ const TournamentView = () => {
   return (
     <div className="tournament-view">
       <h1>Turnieje</h1>
-      <button onClick={() => setShowModal(true)} className="create-tournament-button">Utwórz Turniej</button>
+      {token && <button onClick={() => setShowModal(true)} className="create-tournament-button">Utwórz Turniej</button>}
       <table className="tournament-table">
         <thead>
           <tr>
             <th>Nazwa</th>
-            <th>Data i Czas</th>
-            <th>Miasto</th>
+            <th>Data rozpoczęcia</th>
+            <th>Miejscowość</th>
             <th>Ulica</th>
-            <th>Sport</th>
+            <th>Dyscyplina</th>
           </tr>
         </thead>
         <tbody>
@@ -82,38 +82,40 @@ const TournamentView = () => {
           ))}
         </tbody>
       </table>
-      <CreateTournamentModal 
-        show={showModal} 
-        handleClose={() => setShowModal(false)} 
-        handleSubmit={handleSubmit}
-      >
-        <h2>Utwórz Turniej</h2>
-        <label className="form-label">
-          Nazwa:
-          <input type="text" name="name" value={newTournament.name} onChange={handleInputChange} required className="form-input" />
-        </label>
-        <label className="form-label">
-          Data rozpoczęcia:
-          <input type="datetime-local" name="dateTime" value={newTournament.dateTime} onChange={handleInputChange} required className="form-input" />
-        </label>
-        <label className="form-label">
-          Miejscowość:
-          <input type="text" name="location" value={newTournament.location} onChange={handleInputChange} required className="form-input" />
-        </label>
-        <label className="form-label">
-          Ulica:
-          <input type="text" name="street" value={newTournament.street} onChange={handleInputChange} required className="form-input" />
-        </label>
-        <label className="form-label">
-          Dyscyplina:
-          <select name="sportId" value={newTournament.sportId} onChange={handleInputChange} required className="form-input">
-            <option value="">Wybierz sport</option>
-            {sports.map(sport => (
-              <option key={sport.id} value={sport.id}>{sport.sportName}</option>
-            ))}
-          </select>
-        </label>
-      </CreateTournamentModal>
+      {token && (
+        <CreateTournamentModal 
+          show={showModal} 
+          handleClose={() => setShowModal(false)} 
+          handleSubmit={handleSubmit}
+        >
+          <h2>Utwórz Turniej</h2>
+          <label className="form-label">
+            Nazwa:
+            <input type="text" name="name" value={newTournament.name} onChange={handleInputChange} required className="form-input" />
+          </label>
+          <label className="form-label">
+            Data rozpoczęcia:
+            <input type="datetime-local" name="dateTime" value={newTournament.dateTime} onChange={handleInputChange} required className="form-input" />
+          </label>
+          <label className="form-label">
+            Miejscowość:
+            <input type="text" name="location" value={newTournament.location} onChange={handleInputChange} required className="form-input" />
+          </label>
+          <label className="form-label">
+            Ulica:
+            <input type="text" name="street" value={newTournament.street} onChange={handleInputChange} required className="form-input" />
+          </label>
+          <label className="form-label">
+            Dyscyplina:
+            <select name="sportId" value={newTournament.sportId} onChange={handleInputChange} required className="form-input">
+              <option value="">Wybierz dyscyplinę</option>
+              {sports.map(sport => (
+                <option key={sport.id} value={sport.id}>{sport.sportName}</option>
+              ))}
+            </select>
+          </label>
+        </CreateTournamentModal>
+      )}
     </div>
   );
 };
