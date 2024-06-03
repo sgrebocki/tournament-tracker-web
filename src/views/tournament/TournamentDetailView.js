@@ -32,8 +32,6 @@ const TournamentDetailView = () => {
       <h2>Zasady turnieju</h2>
       <p><strong>Dyscyplina:</strong> {tournament.sport.sportName}</p>
       <p><strong>Pełny czas meczu:</strong> {tournament.sport.rule.fullTime} minut</p>
-      <p><strong>Części:</strong> {tournament.sport.rule.parts}</p>
-      <p><strong>Czas przerwy:</strong> {tournament.sport.rule.breakTime} minut</p>
       <h2>Drużyny biorące udział</h2>
       <ul>
         {tournament.teamsList.map(team => (
