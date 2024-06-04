@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Header from './components/header/Header';
 import TournamentView from './views/tournament/TournamentView';
 import Login from './components/login/Login';
+import Register from './components/register/Register';
 import { fetchAccount } from './api/tournamentApi';
 import './App.css';
 
@@ -30,6 +31,7 @@ function App() {
         <Header token={token} username={username} setToken={setToken} />
         <Routes>
           <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<TournamentView token={token} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

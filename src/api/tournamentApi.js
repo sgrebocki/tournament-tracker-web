@@ -13,6 +13,10 @@ export const authenticate = async (username, password) => {
   return token;
 };
 
+export const register = (userData) => {
+  return apiClient.post('/auth/register', userData);
+};
+
 // TORURNAMENTS
 export const fetchTournaments = () => {
   return apiClient.get('/tournaments');
