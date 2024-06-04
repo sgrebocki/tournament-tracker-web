@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchTournaments } from '../../api/tournamentApi';
+import { fetchTournamentById } from '../../api/tournamentApi';
 import { formatDateTime } from '../../utils/helpers';
 import './TournamentDetailView.css';
 
@@ -9,10 +9,9 @@ const TournamentDetailView = () => {
   const [tournament, setTournament] = useState(null);
 
   useEffect(() => {
-    fetchTournaments()
+    fetchTournamentById(id)
       .then(response => {
-        const tournament = response.data.find(t => t.id === parseInt(id));
-        setTournament(tournament);
+        setTournament(response.data);
       })
       .catch(error => {
         console.error('Error fetching tournament:', error);

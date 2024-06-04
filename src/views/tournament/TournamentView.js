@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchTournaments, fetchSports, createTournament, fetchTournamentById } from '../../api/tournamentApi';
+import { fetchTournaments, fetchSports, createTournament } from '../../api/tournamentApi';
 import CreateTournamentModal from '../../components/modal/CreateTournamentModal';
 import './TournamentView.css';
 
