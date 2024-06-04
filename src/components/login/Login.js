@@ -13,9 +13,13 @@ const Login = ({ setToken }) => {
     e.preventDefault();
     try {
       const token = await authenticate(username, password);
-      setToken(token);
-      localStorage.setItem('token', token);
-      navigate('/');
+      if (token) {
+        setToken(token);
+        localStorage.setItem('token', token);
+        navigate('/');
+      } else {
+        throw new Error('Authentication failed');
+      }
     } catch (error) {
       setError('Nieprawidłowa nazwa użytkownika lub hasło. Spróbuj ponownie.');
     }
@@ -33,8 +37,11 @@ const Login = ({ setToken }) => {
         <label>
           Hasło:
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </label>
-        <button type="submit">Zaloguj</button>
+          </label>
+        <div className="button-container">
+          <button type="submit">Zaloguj</button>
+          <button onClick={() => navigate('/register')} className="register-button">Zarejestruj się</button>
+        </div>
       </form>
     </div>
   );

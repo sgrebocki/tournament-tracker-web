@@ -43,3 +43,8 @@
   button:hover {
     background-color: #555;
   }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }

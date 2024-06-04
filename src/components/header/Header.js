@@ -1,18 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import logo from '../../addons/logoTT.png';
 
-const Header = ({ token }) => {
+const Header = ({ token, username, setToken }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setToken('');
+    localStorage.removeItem('token');
+    navigate('/');
+  };
+
   return (
     <header className="header">
-      <div className="header-logo">
-        <img src={logo} alt="Logo" />
+      <div className="header-left">
+        <div className="header-logo">
+          <img src={logo} alt="Logo" />
+        </div>
+        <button onClick={() => navigate('/')} className="header-link">Strona główna</button>
       </div>
-      <nav className="header-nav">
-        <Link to="/" className="header-link">Strona główna</Link>
-        {!token && <Link to="/login" className="header-link">Login</Link>}
-      </nav>
+      <div className="header-right">
+        {token ? (
+          <>
+            <button onClick={handleLogout} className="header-link header-logout-button">Wyloguj</button>
+            <button onClick={() => navigate('/user')} className="header-link">{username}</button>
+          </>
+        ) : (
+          <button onClick={() => navigate('/login')} className="header-link">Zaloguj się</button>
+        )}
+      </div>
     </header>
   );
 };

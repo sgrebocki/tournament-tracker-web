@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchTournaments, fetchSports, createTournament } from '../../api/tournamentApi';
+import { fetchTournaments, fetchSports, createTournament, fetchTournamentById } from '../../api/tournamentApi';
 import CreateTournamentModal from '../../components/modal/CreateTournamentModal';
 import './TournamentView.css';
 
@@ -58,8 +58,12 @@ const TournamentView = ({ token }) => {
 
   return (
     <div className="tournament-view">
-      <h1>Turnieje</h1>
+      <div className="button-container">
+        <div className="title-container">
+          <h1>Turnieje</h1>
+        </div>
       {token && <button onClick={() => setShowModal(true)} className="create-tournament-button">Utwórz Turniej</button>}
+    </div>
       <table className="tournament-table">
         <thead>
           <tr>
