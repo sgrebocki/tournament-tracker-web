@@ -1,10 +1,15 @@
 import axios from 'axios';
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: 'http://localhost:8080/api',
 });
 
 // AUTHENTICATION
+const token = localStorage.getItem('token');
+if (token) {
+  apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
+
 export const authenticate = async (username, password) => {
   const response = await apiClient.post('/auth/authenticate', { username, password });
   const token = response.data.accessToken;
@@ -35,7 +40,19 @@ export const fetchSports = () => {
   return apiClient.get('/sports');
 };
 
-// USERS
+// USER ACCOUNT
 export const fetchAccount = () => {
   return apiClient.get('/account');
+};
+
+export const changeUsername = (newUsername) => {
+  return apiClient.put('/account/changeUsername', null, {
+    params: { newUsername }
+  });
+};
+
+export const changePassword = (oldPassword, newPassword) => {
+  return apiClient.put('/account/changePassword', null, {
+    params: { oldPassword, newPassword }
+  });
 };
