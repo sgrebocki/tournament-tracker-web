@@ -18,7 +18,19 @@ const Header = ({ token, username, setToken }) => {
         <div className="header-logo">
           <img src={logo} alt="Logo" />
         </div>
-        <button onClick={() => navigate('/')} className="header-link">Strona główna</button>
+          {token ? (
+            <>
+              <button onClick={() => navigate('/')} className="header-link">Strona główna</button>
+              <button onClick={() => navigate('/teams')} className="header-link">Zespoły</button>
+              <button onClick={() => navigate('/players')} className="header-link">Zawodnicy</button>
+            </>
+          ) : (
+            <>
+              <button onClick={() => navigate('/')} className="header-link">Strona główna</button>
+              <button onClick={() => navigate('/teams')} className="header-link">Zespoły</button>
+            </>
+          )}
+        
       </div>
       <div className="header-right">
         {token ? (
@@ -27,7 +39,9 @@ const Header = ({ token, username, setToken }) => {
             <button onClick={() => navigate('/user')} className="header-link">{username}</button>
           </>
         ) : (
-          <button onClick={() => navigate('/login')} className="header-link">Zaloguj się</button>
+          <>
+            <button onClick={() => navigate('/login')} className="header-link">Zaloguj się</button>
+          </>
         )}
       </div>
     </header>

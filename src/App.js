@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Header from './components/header/Header';
 import TournamentView from './views/tournament/TournamentView';
 import TournamentDetailView from './views/tournament/TournamentDetailView';
+import TeamView from './views/team/TeamView';
+import TeamDetailView from './views/team/TeamDetailView';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import UserAccountView from './views/user/UserAccountView';
@@ -38,6 +40,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/user" element={<UserAccountView />} />
           <Route path="/tournament/:id" element={<TournamentDetailView />} />
+          <Route path="/teams" element={<TeamView />} />
+          <Route path="/team/:id" element={<TeamDetailView />} />
           <Route path="/" element={<TournamentView token={token} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

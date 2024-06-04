@@ -40,6 +40,15 @@ export const fetchSports = () => {
   return apiClient.get('/sports');
 };
 
+// TEAMS
+export const fetchTeams = () => {
+  return apiClient.get('/teams');
+};
+
+export const fetchTeamById = (id) => {
+  return apiClient.get(`/teams/${id}`);
+};
+
 // USER ACCOUNT
 export const fetchAccount = () => {
   return apiClient.get('/account');

@@ -1,0 +1,26 @@
+.team-detail-view {
+    margin: 20px;
+    padding: 20px;
+    background-color: #2e2e2e;
+    color: #f5f5f5;
+    border-radius: 10px;
+  }
+  
+  .team-detail-view h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-detail-view h2 {
+    margin-top: 20px;
+  }
+  
+  .clickable {
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .clickable:hover {
+    background-color: #555;
+    color: #f5f5f5;
+  }
