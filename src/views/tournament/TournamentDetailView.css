@@ -1,23 +1,100 @@
 .tournament-detail-view {
-    background-color: #2e2e2e;
-    color: #f5f5f5;
-    padding: 20px;
-    text-align: left;
-  }
-  
-  .tournament-detail-view h1, h2 {
-    color: #fff;
-  }
-  
-  .tournament-detail-view ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .tournament-detail-view ul li {
-    background-color: #3a3a3a;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  background-color: #2e2e2e;
+  color: #f5f5f5;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.left-tab {
+  width: 20%;
+  background-color: #1e1e1e;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.right-tab {
+  width: 75%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.left-tab h1,
+.left-tab p,
+.left-tab h2 {
+  padding: 5px 20px;
+}
+
+.right-tab h1,
+.right-tab p,
+.right-tab h2 {
+  padding: 5px 20px;
+  width: 60%;
+}
+
+.left-tab p {
+  font-size: 18px;
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.right-tab p {
+  font-size: 17px;
+  width: 60%;
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.settings-section {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.detail-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.detail-btn-light-grey {
+  background-color: #6c757d;
+  color: white;
+}
+
+.detail-btn-light-grey:hover {
+  background-color: #5a6268;
+}
+
+.detail-btn-dark-grey {
+  background-color: #343a40;
+  color: white;
+}
+
+.detail-btn-dark-grey:hover {
+  background-color: #23272b;
+}
+
+.clickable {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 0.5%;
+  width: 60%;
+  color: #ffffff;
+}
+
+.game-item {
+  margin-bottom: 10px;
+}

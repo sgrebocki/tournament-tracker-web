@@ -35,6 +35,14 @@ export const createTournament = (tournamentData) => {
   return apiClient.post('/tournaments', tournamentData);
 };
 
+export const updateTournament = (id, tournamentData) => {
+  return apiClient.put(`/tournaments/${id}`, tournamentData);
+};
+
+export const deleteTournament = (id) => {
+  return apiClient.delete(`/tournaments/${id}`);
+}
+
 // SPORTS
 export const fetchSports = () => {
   return apiClient.get('/sports');
