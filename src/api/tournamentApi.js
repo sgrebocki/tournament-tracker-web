@@ -43,6 +43,32 @@ export const deleteTournament = (id) => {
   return apiClient.delete(`/tournaments/${id}`);
 }
 
+//GAMES
+export const fetchGameById = (id) => {
+  return apiClient.get(`/games/${id}`);
+};
+
+export const addGame = (gameData) => {
+  return apiClient.post('/games', gameData);
+};
+
+export const editGame = (id, gameData) => {
+  return apiClient.put(`/games/${id}`, gameData);
+};
+
+export const deleteGame = (id) => {
+  return apiClient.delete(`/games/${id}`);
+}
+
+export const setGameScore = (id, homeTeamScore, guestTeamScore) => {
+  return apiClient.put(`/games/${id}/setFinalScore`, null, {
+    params: {
+      homeTeamScore,
+      guestTeamScore
+    }
+  });
+};
+
 // SPORTS
 export const fetchSports = () => {
   return apiClient.get('/sports');

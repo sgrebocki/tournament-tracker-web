@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchTournamentById, fetchAccount, fetchSports, updateTournament, deleteTournament } from '../../api/tournamentApi';
+import { fetchTournamentById, fetchAccount, fetchSports, updateTournament, deleteTournament, addGame, editGame, setGameScore, deleteGame } from '../../api/tournamentApi';
 import { formatDateTime } from '../../utils/helpers';
 import './TournamentDetailView.css';
 import '../../components/modal/modal.css';
@@ -12,7 +12,10 @@ const TournamentDetailView = () => {
   const [userAuthorities, setUserAuthorities] = useState([]);
   const [canEdit, setCanEdit] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showAddGameModal, setShowAddGameModal] = useState(false);
+  const [showManageGameModal, setShowManageGameModal] = useState(false);
   const [sports, setSports] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [editData, setEditData] = useState({
     name: '',
     dateTime: '',
@@ -20,11 +23,25 @@ const TournamentDetailView = () => {
     street: '',
     sportId: ''
   });
+  const [gameData, setGameData] = useState({
+    gameTime: '',
+    homeTeamId: '',
+    guestTeamId: ''
+  });
+  const [manageGameData, setManageGameData] = useState({
+    gameId: '',
+    gameTime: '',
+    homeTeamId: '',
+    guestTeamId: '',
+    homeTeamScore: '',
+    guestTeamScore: ''
+  });
 
   useEffect(() => {
     fetchTournamentById(id)
       .then(response => {
         setTournament(response.data);
+        setTeams(response.data.teamsList);
         setEditData({
           name: response.data.name,
           dateTime: response.data.dateTime,
@@ -101,25 +118,85 @@ const TournamentDetailView = () => {
   };
 
   const handleAddGame = () => {
-    
-    console.log('Add game to tournament:', tournament.id);
+    setShowAddGameModal(true);
   };
 
-  const handleEditGame = (gameId) => {
-    
-    console.log('Edit game:', gameId);
+  const handleAddGameChange = (e) => {
+    const { name, value } = e.target;
+    setGameData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
-  const handleEditScore = (gameId) => {
-    
-    console.log('Edit score:', gameId);
+  const handleAddGameSubmit = (e) => {
+    e.preventDefault();
+    addGame({ ...gameData, tournamentId: id }).then(() => {
+      setShowAddGameModal(false);
+      fetchTournamentById(id).then(response => {
+        setTournament(response.data);
+      });
+    }).catch(error => {
+      console.error('Error adding game:', error);
+    });
+  };
+
+  const handleManageGame = (game) => {
+    setManageGameData({
+      gameId: game.id,
+      gameTime: game.gameTime,
+      homeTeamId: game.homeTeam.id,
+      guestTeamId: game.guestTeam.id,
+      homeTeamScore: game.homeTeamScore || '',
+      guestTeamScore: game.guestTeamScore || ''
+    });
+    setShowManageGameModal(true);
+  };
+
+  const handleManageGameChange = (e) => {
+    const { name, value } = e.target;
+    setManageGameData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleEditGameSubmit = (e) => {
+    e.preventDefault();
+    const { gameId, gameTime, homeTeamId, guestTeamId } = manageGameData;
+    editGame(gameId, { gameTime, homeTeamId, guestTeamId, tournamentId: id }).then(() => {
+      setShowManageGameModal(false);
+      fetchTournamentById(id).then(response => {
+        setTournament(response.data);
+      });
+    }).catch(error => {
+      console.error('Error editing game:', error);
+    });
+  };
+
+  const handleSetScoreSubmit = (e) => {
+    e.preventDefault();
+    const { gameId, homeTeamScore, guestTeamScore } = manageGameData;
+    setGameScore(gameId, homeTeamScore, guestTeamScore).then(() => {
+      setShowManageGameModal(false);
+      fetchTournamentById(id).then(response => {
+        setTournament(response.data);
+      });
+    }).catch(error => {
+      console.error('Error setting game score:', error);
+    });
   };
 
   const handleDeleteGame = (gameId) => {
     const confirmed = window.confirm("Czy jesteś pewny/a, że chcesz usunąć ten mecz?");
     if (confirmed) {
-      
-      console.log('Delete game:', gameId);
+      deleteGame(gameId).then(() => {
+        fetchTournamentById(id).then(response => {
+          setTournament(response.data);
+        });
+      }).catch(error => {
+        console.error('Error deleting game:', error);
+      });
     }
   };
 
@@ -148,33 +225,30 @@ const TournamentDetailView = () => {
         )}
       </div>
       <div className="right-tab">
+        <div className="teams-container">
         <h2>Drużyny biorące udział</h2>
-        <ul>
           {tournament.teamsList.map(team => (
-            <li key={team.id} onClick={() => handleTeamClick(team.id)} className="clickable">{team.name}</li>
+            <p key={team.id} onClick={() => handleTeamClick(team.id)} className="clickable team-item">{team.name}</p>
           ))}
-        </ul>
-        <h2>
-          Mecze
-          {canEdit && <button onClick={handleAddGame} className="detail-btn detail-btn-light-grey ml-2">Dodaj Mecz</button>}
-        </h2>
-        <ul>
+        </div>
+        <div className="games-container">
+          <h2>Mecze</h2>
+          {canEdit && <button onClick={handleAddGame} className="detail-btn detail-btn-dark-grey">Dodaj Mecz</button>}
           {tournament.gamesList.map(game => (
-            <li key={game.id} className="game-item">
+            <div key={game.id} className="game-item">
+              <p><strong>{game.homeTeam.name}</strong> : <strong>{game.guestTeam.name}</strong></p>
+              <p><strong>{game.homeTeamScore || 0}</strong> : <strong>{game.guestTeamScore || 0}</strong></p>
               <p><strong>Czas rozpoczęcia:</strong> {formatDateTime(game.gameTime)}</p>
-              <p><strong>Wynik:</strong> {game.score}</p>
               {canEdit && (
-                <div className="button-group">
-                  <button onClick={() => handleEditGame(game.id)} className="detail-btn detail-btn-light-grey">Edytuj Mecz</button>
-                  <button onClick={() => handleEditScore(game.id)} className="detail-btn detail-btn-light-grey">Edytuj Wynik</button>
-                  <button onClick={() => handleDeleteGame(game.id)} className="detail-btn detail-btn-dark-grey">Usuń Mecz</button>
+                <div className="button-group-center">
+                  <button onClick={() => handleManageGame(game)} className="detail-btn detail-btn-dark-grey">Zarządaj</button>
                 </div>
               )}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
-      
+
       {showEditModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -207,10 +281,102 @@ const TournamentDetailView = () => {
                 </select>
               </label>
               <div className="modal-button-group">
-                {canEdit && <button type="submit" className="modal-btn modal-btn-dark-grey">Zapisz</button>}
+                <button type="submit" className="modal-btn modal-btn-dark-grey">Zapisz</button>
                 <button type="button" onClick={() => setShowEditModal(false)} className="modal-btn modal-btn-dark-grey">Anuluj</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {showAddGameModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={() => setShowAddGameModal(false)}>&times;</button>
+            <h2>Dodaj Mecz</h2>
+            <form onSubmit={handleAddGameSubmit}>
+              <label className="modal-form-label">
+                Data meczu:
+                <input type="datetime-local" name="gameTime" value={gameData.gameTime} onChange={handleAddGameChange} required className="modal-form-input" />
+              </label>
+              <label className="modal-form-label">
+                Gospodarz:
+                <select name="homeTeamId" value={gameData.homeTeamId} onChange={handleAddGameChange} required className="modal-form-input">
+                  <option value="">Wybierz drużynę</option>
+                  {teams.map(team => (
+                    <option key={team.id} value={team.id}>{team.name}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="modal-form-label">
+                Gość:
+                <select name="guestTeamId" value={gameData.guestTeamId} onChange={handleAddGameChange} required className="modal-form-input">
+                  <option value="">Wybierz drużynę</option>
+                  {teams.map(team => (
+                    <option key={team.id} value={team.id}>{team.name}</option>
+                  ))}
+                </select>
+              </label>
+              <div className="modal-button-group">
+                <button type="submit" className="modal-btn modal-btn-dark-grey">Zapisz</button>
+                <button type="button" onClick={() => setShowAddGameModal(false)} className="modal-btn modal-btn-dark-grey">Anuluj</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {showManageGameModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="modal-close-button" onClick={() => setShowManageGameModal(false)}>&times;</button>
+            <h2>Zarządaj Mecz</h2>
+            <form onSubmit={handleEditGameSubmit}>
+              <label className="modal-form-label">
+                Data meczu:
+                <input type="datetime-local" name="gameTime" value={manageGameData.gameTime} onChange={handleManageGameChange} required className="modal-form-input" />
+              </label>
+              <label className="modal-form-label">
+                Gospodarz:
+                <select name="homeTeamId" value={manageGameData.homeTeamId} onChange={handleManageGameChange} required className="modal-form-input">
+                  <option value="">Wybierz drużynę</option>
+                  {teams.map(team => (
+                    <option key={team.id} value={team.id}>{team.name}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="modal-form-label">
+                Gość:
+                <select name="guestTeamId" value={manageGameData.guestTeamId} onChange={handleManageGameChange} required className="modal-form-input">
+                  <option value="">Wybierz drużynę</option>
+                  {teams.map(team => (
+                    <option key={team.id} value={team.id}>{team.name}</option>
+                  ))}
+                </select>
+              </label>
+              <div className="modal-button-group">
+                <button type="submit" className="modal-btn modal-btn-dark-grey">Zapisz</button>
+                <button type="button" onClick={() => setShowManageGameModal(false)} className="modal-btn modal-btn-dark-grey">Anuluj</button>
+              </div>
+            </form>
+            <h2>Ustaw Wynik</h2>
+            <form onSubmit={handleSetScoreSubmit}>
+              <label className="modal-form-label">
+                {tournament.teamsList.find(team => team.id === manageGameData.homeTeamId)?.name}:
+                <input type="number" name="homeTeamScore" value={manageGameData.homeTeamScore} onChange={handleManageGameChange} required className="modal-form-input" min="0" />
+              </label>
+              <label className="modal-form-label">
+                {tournament.teamsList.find(team => team.id === manageGameData.guestTeamId)?.name}:
+                <input type="number" name="guestTeamScore" value={manageGameData.guestTeamScore} onChange={handleManageGameChange} required className="modal-form-input" min="0" />
+              </label>
+              <div className="modal-button-group">
+                <button type="submit" className="modal-btn modal-btn-dark-grey">Zapisz</button>
+                <button type="button" onClick={() => setShowManageGameModal(false)} className="modal-btn modal-btn-dark-grey">Anuluj</button>
+              </div>
+            </form>
+            <div className="button-group">
+              <button onClick={() => handleDeleteGame(manageGameData.gameId)} className="modal-btn modal-btn-dark-grey">Usuń Mecz</button>
+            </div>
           </div>
         </div>
       )}
