@@ -25,16 +25,28 @@ const TeamDetailView = () => {
 
   return (
     <div className="team-detail-view">
-      <h1>{team.name}</h1>
-      {team.tournament && (
-        <>
-        <h2>Turniej</h2>
-            <div className="clickable" onClick={() => navigate(`/tournament/${team.tournament.id}`)}><strong>Nazwa:</strong> {team.tournament.name}</div>
+      <div className='team-detail-view-teamname'><h1>{team.name}</h1></div>
+      <div className='team-tournament-detail'>
+        {team.tournament && (
+          <>
+            <h2>Najbliższy turniej</h2>
+            <div className="tam-clickable-row" onClick={() => navigate(`/tournament/${team.tournament.id}`)}><strong>Nazwa:</strong> {team.tournament.name}</div>
             <div><strong>Czas rozpoczęcia:</strong> {formatDateTime(team.tournament.dateTime)}</div>
             <div><strong>Miejscowość:</strong> {team.tournament.location}</div>
             <div><strong>Ulica:</strong> {team.tournament.street}</div>
-        </>
-      )}
+          </>
+        )}
+      </div>
+      <div className='team-users-detail'>
+        <h2>Zawodnicy</h2>
+        <ul className="no-list-style">
+          {team.users.map(user => (
+            <li key={user.userId} className="user-item">
+              <div><strong>Imię:</strong> {user.firstName} <strong>Nazwisko:</strong> {user.lastName}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

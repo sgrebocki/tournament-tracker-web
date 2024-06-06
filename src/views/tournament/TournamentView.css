@@ -1,8 +1,10 @@
 .tournament-view {
-  background-color: #2e2e2e;
+  margin: 2%;
+  padding: 2% 3%;
+  padding-bottom: 3%;
+  background-color: rgba(32, 32, 32, 0.315);
   color: #f5f5f5;
-  padding: 20px;
-  text-align: center;
+  border-radius: 20px;
   width: 80%;
   margin: auto;
 }

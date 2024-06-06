@@ -1,26 +1,64 @@
 .team-detail-view {
-    margin: 20px;
-    padding: 20px;
-    background-color: #2e2e2e;
-    color: #f5f5f5;
-    border-radius: 10px;
-  }
-  
-  .team-detail-view h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .team-detail-view h2 {
-    margin-top: 20px;
-  }
-  
-  .clickable {
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .clickable:hover {
-    background-color: #555;
-    color: #f5f5f5;
-  }
+  margin: 20px;
+  padding: 20px;
+  background-color: rgba(32, 32, 32, 0.315);
+  color: #f5f5f5;
+  border-radius: 20px;
+}
+
+.team-detail-view-teamname {
+  text-align: center;
+  padding: 0.1% 0%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  background-color: rgba(32, 32, 32, 0.8);
+}
+
+.team-detail-view h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.team-detail-view h2 {
+  margin-top: 20px;
+  position: relative;
+}
+
+.team-detail-view h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1px;
+  width: 80%;
+  background-color: #dddddd42;
+}
+
+.team-tournament-detail, .team-users-detail {
+  padding: 20px;
+  margin-bottom: 2%;
+  background-color: rgba(32, 32, 32, 0.6);
+  color: #f5f5f5;
+  border-radius: 20px;
+}
+
+.tam-clickable-row {
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tam-clickable-row:hover {
+  background-color: rgba(32, 32, 32, 0.9);
+}
+
+.user-item {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: rgba(32, 32, 32, 0.6);
+  border-radius: 15px;
+}
+
+.user-item:hover {
+  background-color: rgba(32, 32, 32, 1.2);
+}
