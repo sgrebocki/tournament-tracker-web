@@ -8,6 +8,8 @@ import TeamDetailView from './views/team/TeamDetailView';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import UserAccountView from './views/user/UserAccountView';
+import PlayerView from './views/player/PlayerView';
+import PlayerDetailView from './views/player/PlayerDetailView';
 import { fetchAccount } from './api/tournamentApi';
 import './App.css';
 import { apiClient } from './api/tournamentApi';
@@ -39,6 +41,8 @@ function App() {
           <Route path="/login" element={<Login setToken={setToken} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/user" element={<UserAccountView />} />
+          <Route path="/players" element={<PlayerView />} />
+          <Route path="/player/:id" element={<PlayerDetailView />} />
           <Route path="/tournament/:id" element={<TournamentDetailView />} />
           <Route path="/teams" element={<TeamView />} />
           <Route path="/team/:id" element={<TeamDetailView />} />

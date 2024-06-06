@@ -83,6 +83,15 @@ export const fetchTeamById = (id) => {
   return apiClient.get(`/teams/${id}`);
 };
 
+// USERS
+export const fetchUsers = () => {
+  return apiClient.get('/users');
+};
+
+export const fetchUserById = (id) => {
+  return apiClient.get(`/users/${id}`);
+};
+
 // USER ACCOUNT
 export const fetchAccount = () => {
   return apiClient.get('/account');

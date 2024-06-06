@@ -39,13 +39,13 @@ const TeamDetailView = () => {
       </div>
       <div className='team-users-detail'>
         <h2>Zawodnicy</h2>
-        <ul className="no-list-style">
+        <div className="team-user-list">
           {team.users.map(user => (
-            <li key={user.userId} className="user-item">
-              <div><strong>Imię:</strong> {user.firstName} <strong>Nazwisko:</strong> {user.lastName}</div>
-            </li>
+            <div onClick={() => navigate(`/player/${user.userId}`)} key={user.userId} className="user-item">
+              <p>{user.firstName} {user.lastName}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

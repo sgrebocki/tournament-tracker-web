@@ -6,7 +6,7 @@
     color: #f5f5f5;
     border-radius: 20px;
     width: 80%;
-    margin: auto;
+    margin: 20px auto;
   }
   
   .title-container {
@@ -25,7 +25,7 @@
   .team-table th, .team-table td {
     padding: 15px;
     border: 1px solid #ccc;
-    font-size: 1.1em;
+    font-size: 1em;
   }
   
   .team-table th {

@@ -62,7 +62,7 @@ const UserAccountView = () => {
   return (
     <div className="user-account-container">
       <h2>Ustawienia Konta</h2>
-      <p><strong>Nazwa użytkownika:</strong> {account.username}</p>
+      <p><strong>Email:</strong> {account.username}</p>
       <p><strong>Imię:</strong> {account.firstName}</p>
       <p><strong>Nazwisko:</strong> {account.lastName}</p>
       {account.team && <p><strong>Zespół:</strong> {account.team.name}</p>}
@@ -75,8 +75,10 @@ const UserAccountView = () => {
               Nowy email:
               <input type="email" value={newUsername} onChange={(e) => setNewUsername(e.target.value)} required />
             </label>
-            <button type="submit">Zapisz</button>
-            <button type="button" onClick={() => setEditMode(false)}>Anuluj</button>
+            <div className='user-account-button-container'>
+              <button type="submit">Zapisz</button>
+              <button type="button" onClick={() => setEditMode(false)}>Anuluj</button>
+            </div>
           </form>
           <form onSubmit={handlePasswordChange} className="edit-form">
             <h3>Zmień hasło</h3>
@@ -92,8 +94,10 @@ const UserAccountView = () => {
               Potwierdź nowe hasło:
               <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
             </label>
-            <button type="submit">Zapisz</button>
-            <button type="button" onClick={() => setEditMode(false)}>Anuluj</button>
+            <div className='user-account-button-container'>
+              <button type="submit">Zapisz</button>
+              <button type="button" onClick={() => setEditMode(false)}>Anuluj</button>
+            </div>
           </form>
         </>
       )}

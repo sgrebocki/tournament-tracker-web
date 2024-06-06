@@ -1,0 +1,53 @@
+    .player-detail-view {
+        background-color: rgba(32, 32, 32, 0.6);
+        color: #f5f5f5;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 20px;
+        margin: 20px auto;
+        width: 60%;
+    }
+
+    .player-detail-view h1 {
+        margin: 20px auto;
+        text-align: center;
+        padding: 10px;
+        width: 60%;
+        border-radius: 10px;
+        background-color: rgba(32, 32, 32, 0.6);
+    }
+
+    .player-detail-view h2 {
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .player-detail-view h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 1px;
+        width: 80%;
+        background-color: #dddddd42;
+    }
+  
+    .player-detail-view p {
+        margin: 10px 0;
+    }
+    
+    .clickable-user-team {
+        background-color: rgba(32, 32, 32, 0.6);
+        margin: 20px auto;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 200px;
+        text-align: center;
+    }
+    
+    .clickable-user-team:hover {
+        background-color: rgba(32, 32, 32, 0.9);
+    }
+  
