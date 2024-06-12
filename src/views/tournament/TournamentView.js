@@ -70,8 +70,8 @@ const TournamentView = ({ token }) => {
             <th>Nazwa</th>
             <th>Data rozpoczęcia</th>
             <th>Miejscowość</th>
-            <th>Ulica</th>
-            <th>Dyscyplina</th>
+            <th class="hide-on-mobile">Ulica</th>
+            <th class="hide-on-mobile">Dyscyplina</th>
           </tr>
         </thead>
         <tbody>
@@ -80,8 +80,8 @@ const TournamentView = ({ token }) => {
               <td>{tournament.name}</td>
               <td>{new Date(tournament.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}, {new Date(tournament.dateTime).toLocaleDateString()}</td>
               <td>{tournament.location}</td>
-              <td>{tournament.street}</td>
-              <td>{tournament.sport.sportName}</td>
+              <td class="hide-on-mobile">{tournament.street}</td>
+              <td class="hide-on-mobile">{tournament.sport.sportName}</td>
             </tr>
           ))}
         </tbody>

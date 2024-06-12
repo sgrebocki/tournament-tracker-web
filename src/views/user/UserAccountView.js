@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAccount, changeUsername, changePassword } from '../../api/tournamentApi';
 import './UserAccountView.css';
+import { Link } from 'react-router-dom';
 
 const UserAccountView = () => {
   const [account, setAccount] = useState(null);
@@ -65,7 +66,13 @@ const UserAccountView = () => {
       <p><strong>Email:</strong> {account.username}</p>
       <p><strong>Imię:</strong> {account.firstName}</p>
       <p><strong>Nazwisko:</strong> {account.lastName}</p>
-      {account.team && <p><strong>Zespół:</strong> {account.team.name}</p>}
+      {account.team && (
+        <Link to={`/team/${account.team.id}`}>
+          <p style={{ cursor: 'pointer' }}>
+            <strong>Zespół:</strong> {account.team.name}
+          </p>
+        </Link>
+      )}
       <button onClick={() => setEditMode(true)} className="edit-button">Edytuj konto</button>
       {editMode && (
         <>

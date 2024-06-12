@@ -16,7 +16,7 @@ const Header = ({ token, username, setToken }) => {
     <header className="header">
       <div className="header-left">
         <div className="header-logo">
-          <img src={logo} alt="Logo" />
+          {/* <img src={logo} alt="Logo" /> */}
         </div>
           {token ? (
             <>
