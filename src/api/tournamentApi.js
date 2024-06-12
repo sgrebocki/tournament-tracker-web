@@ -83,6 +83,22 @@ export const fetchTeamById = (id) => {
   return apiClient.get(`/teams/${id}`);
 };
 
+export const updateTeam = (id, teamData) => {
+  return apiClient.put(`/teams/${id}`, teamData);
+};
+
+export const createTeam = (teamData) => {
+  return apiClient.post('/teams', teamData);
+}
+
+export const deleteTeam = (id) => {
+  return apiClient.delete(`/teams/${id}`);
+}
+
+export const leaveTeam = (id) => {
+  return apiClient.put(`/teams/${id}/quit`);
+}
+
 // USERS
 export const fetchUsers = () => {
   return apiClient.get('/users');

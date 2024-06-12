@@ -60,7 +60,6 @@
   justify-content: center;
 }
 
-
 .tam-clickable-row {
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -81,4 +80,28 @@
 
 .user-item:hover {
   background-color: rgba(32, 32, 32, 1.2);
+}
+
+.team-management-panel {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: rgba(32, 32, 32, 0.6);
+  color: #f5f5f5;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.manage-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #3a3a3a;
+  color: white;
+  margin-top: 20px;
+}
+
+.manage-button:hover {
+  background-color: #555;
 }
