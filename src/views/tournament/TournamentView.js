@@ -58,12 +58,12 @@ const TournamentView = ({ token }) => {
 
   return (
     <div className="tournament-view">
-      <div className="button-container">
-        <div className="title-container">
-          <h1>Turnieje</h1>
-        </div>
-      {token && <button onClick={() => setShowModal(true)} className="create-tournament-button">Utwórz Turniej</button>}
-    </div>
+      <div className='create-tournament-button-container'>
+        {token && <button onClick={() => setShowModal(true)} className="create-tournament-button">Utwórz Turniej</button>}
+      </div>
+      <div className="title-container">
+        <h1>Turnieje</h1>
+      </div>
       <table className="tournament-table">
         <thead>
           <tr>

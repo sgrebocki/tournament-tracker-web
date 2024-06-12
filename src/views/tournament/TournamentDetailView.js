@@ -206,47 +206,49 @@ const TournamentDetailView = () => {
 
   return (
     <div className="tournament-detail-view">
-      <div className="left-tab">
-        <h1>{tournament.name}</h1>
+      <div className='tournament-container'>
+        <div className='tournament-detail-view-tournamentname'>
+          <h1>{tournament.name}</h1>
+        </div>
         <p><strong>Czas rozpoczęcia turnieju:</strong> {formatDateTime(tournament.dateTime)}</p>
         <p><strong>Miejscowość:</strong> {tournament.location}</p>
         <p><strong>Ulica:</strong> {tournament.street}</p>
+      </div>
+      <div className='rules-container'>
         <h2>Zasady turnieju</h2>
         <p><strong>Dyscyplina:</strong> {tournament.sport.sportName}</p>
         <p><strong>Pełny czas meczu:</strong> {tournament.sport.rule.fullTime} minut</p>
-        {canEdit && (
-          <div className="settings-section">
-            <h2>Ustawienia turnieju</h2>
-            <div className="button-group">
-              <button onClick={handleEdit} className="detail-btn detail-btn-dark-grey">Edytuj</button>
-              <button onClick={handleDelete} className="detail-btn detail-btn-dark-grey">Usuń</button>
-            </div>
-          </div>
-        )}
       </div>
-      <div className="right-tab">
-        <div className="teams-container">
-        <h2>Drużyny biorące udział</h2>
-          {tournament.teamsList.map(team => (
-            <p key={team.id} onClick={() => handleTeamClick(team.id)} className="clickable team-item">{team.name}</p>
-          ))}
+      {canEdit && (
+        <div className="settings-section">
+          <h2>Ustawienia turnieju</h2>
+          <div className="button-group">
+            <button onClick={handleEdit} className="detail-btn detail-btn-dark-grey">Edytuj</button>
+            <button onClick={handleDelete} className="detail-btn detail-btn-dark-grey">Usuń</button>
+          </div>
         </div>
-        <div className="games-container">
-          <h2>Mecze</h2>
-          {canEdit && <button onClick={handleAddGame} className="detail-btn detail-btn-dark-grey">Dodaj Mecz</button>}
-          {tournament.gamesList.map(game => (
-            <div key={game.id} className="game-item">
-              <p><strong>{game.homeTeam.name}</strong> : <strong>{game.guestTeam.name}</strong></p>
-              <p><strong>{game.homeTeamScore || 0}</strong> : <strong>{game.guestTeamScore || 0}</strong></p>
-              <p><strong>Czas rozpoczęcia:</strong> {formatDateTime(game.gameTime)}</p>
-              {canEdit && (
-                <div className="button-group-center">
-                  <button onClick={() => handleManageGame(game)} className="detail-btn detail-btn-dark-grey">Zarządaj</button>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+      )}
+      <div className="teams-container">
+      <h2>Drużyny biorące udział</h2>
+        {tournament.teamsList.map(team => (
+          <p key={team.id} onClick={() => handleTeamClick(team.id)} className="clickable team-item">{team.name}</p>
+        ))}
+      </div>
+      <div className="games-container">
+        <h2>Mecze</h2>
+        {canEdit && <button onClick={handleAddGame} className="detail-btn detail-btn-dark-grey">Dodaj Mecz</button>}
+        {tournament.gamesList.map(game => (
+          <div key={game.id} className="game-item">
+            <p><strong>{game.homeTeam.name}</strong> : <strong>{game.guestTeam.name}</strong></p>
+            <p><strong>{game.homeTeamScore || 0}</strong> : <strong>{game.guestTeamScore || 0}</strong></p>
+            <p><strong>Czas rozpoczęcia:</strong> {formatDateTime(game.gameTime)}</p>
+            {canEdit && (
+              <div className="button-group-center">
+                <button onClick={() => handleManageGame(game)} className="detail-btn detail-btn-dark-grey">Zarządaj</button>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
 
       {showEditModal && (
