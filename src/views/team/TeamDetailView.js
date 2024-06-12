@@ -31,7 +31,7 @@ const TeamDetailView = () => {
       });
   }, [id]);
 
-  if (!team) {
+  if (!team || !account) {
     return <div>Ładowanie...</div>;
   }
 
@@ -98,7 +98,7 @@ const TeamDetailView = () => {
           ))}
         </div>
       </div>
-      {(team.canUpdateOrDelete || account.team.id === team.id) && (
+      {(team.canUpdateOrDelete || (account.team && account.team.id === team.id)) && (
         <div className='team-management-panel'>
           <h2>Zarządzaj zespołem</h2>
           {team.canUpdateOrDelete ? (

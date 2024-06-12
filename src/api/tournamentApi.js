@@ -96,7 +96,7 @@ export const deleteTeam = (id) => {
 }
 
 export const leaveTeam = (id) => {
-  return apiClient.put(`/teams/${id}/quit`);
+  return apiClient.post(`/teams/${id}/quit`);
 }
 
 export const addUserToTeam = (teamId, userId) => {
