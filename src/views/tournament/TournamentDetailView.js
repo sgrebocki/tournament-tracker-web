@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchTournamentById, fetchAccount, fetchSports, updateTournament, deleteTournament, addGame, editGame, setGameScore, deleteGame } from '../../api/tournamentApi';
+import { fetchTournamentById, fetchAccount, fetchSports, updateTournament, deleteTournament, addGame, editGame, setGameScore, deleteGame, signUpTeamForTournament, signOutTeamFromTournament } from '../../api/tournamentApi';
 import { formatDateTime } from '../../utils/helpers';
 import './TournamentDetailView.css';
 import '../../components/modal/modal.css';
@@ -9,6 +9,7 @@ const TournamentDetailView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [tournament, setTournament] = useState(null);
+  const [account, setAccount] = useState(null);
   const [userAuthorities, setUserAuthorities] = useState([]);
   const [canEdit, setCanEdit] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -57,6 +58,7 @@ const TournamentDetailView = () => {
 
     fetchAccount()
       .then(response => {
+        setAccount(response.data);
         setUserAuthorities(response.data.authorities);
       })
       .catch(error => {
@@ -204,6 +206,28 @@ const TournamentDetailView = () => {
     navigate(`/team/${teamId}`);
   };
 
+  const handleSignUp = () => {
+    signUpTeamForTournament(id).then(() => {
+      alert('Zespół został zapisany do turnieju.');
+      fetchTournamentById(id).then(response => {
+        setTournament(response.data);
+      });
+    }).catch(error => {
+      console.error('Error signing up team for tournament:', error);
+    });
+  };
+
+  const handleSignOut = () => {
+    signOutTeamFromTournament(id).then(() => {
+      alert('Zespół został wypisany z turnieju.');
+      fetchTournamentById(id).then(response => {
+        setTournament(response.data);
+      });
+    }).catch(error => {
+      console.error('Error signing out team from tournament:', error);
+    });
+  };
+
   return (
     <div className="tournament-detail-view">
       <div className='tournament-container'>
@@ -219,6 +243,15 @@ const TournamentDetailView = () => {
         <p><strong>Dyscyplina:</strong> {tournament.sport.sportName}</p>
         <p><strong>Pełny czas meczu:</strong> {tournament.sport.rule.fullTime} minut</p>
       </div>
+      {account && account.authorities.includes("ROLE_TEAM_OWNER") && account.team && (
+        <div className="team-management-container">
+          <h2>Zarządzaj zespołem w turnieju</h2>
+          <div className="button-group">
+            <button onClick={handleSignUp} className="detail-btn detail-btn-dark-grey">Zapisz do turnieju</button>
+            <button onClick={handleSignOut} className="detail-btn detail-btn-dark-grey">Wypisz z turnieju</button>
+          </div>
+        </div>
+      )}
       {canEdit && (
         <div className="settings-section">
           <h2>Ustawienia turnieju</h2>

@@ -43,6 +43,14 @@ export const deleteTournament = (id) => {
   return apiClient.delete(`/tournaments/${id}`);
 }
 
+export const signUpTeamForTournament = (tournamentId) => {
+  return apiClient.put(`/api/teams/tournament/signUp/${tournamentId}`);
+};
+
+export const signOutTeamFromTournament = (tournamentId) => {
+  return apiClient.put(`/api/teams/tournament/signOut/${tournamentId}`);
+};
+
 //GAMES
 export const fetchGameById = (id) => {
   return apiClient.get(`/games/${id}`);

@@ -36,7 +36,7 @@
   background-color: #dddddd42;
 }
 
-.teams-container, .games-container, .tournament-container, .rules-container {
+.teams-container, .games-container, .tournament-container, .rules-container, .team-management-container {
   background-color: rgba(32, 32, 32, 0.6);
   padding: 0.5% 7.5%;
   margin: 2% 0%;
@@ -88,12 +88,17 @@
 }
 
 .detail-btn-dark-grey {
-  background-color: #343a40;
-  color: white;
+  padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    color: white;
 }
 
 .detail-btn-dark-grey:hover {
-  background-color: #23272b;
+  background-color: #555;
 }
 
 .ml-2 {
