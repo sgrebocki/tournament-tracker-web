@@ -100,27 +100,21 @@ select {
 
 @media (max-width: 700px) {
   .tournament-table {
-    width: 70%;
-    font-size: 0.88em;
+      width: 70%;
+      font-size: 0.88em;
+  }
+  .hide-on-mobile {
+      display: none;
+  }
+  .submit-button {
+      font-size: 0.8em;
   }
 }
 
 @media (min-width: 701px) {
   .tournament-table {
-    width: 70%;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 700px) {
-  .hide-on-mobile {
-    display: none;
-  }
-}
-
-@media (max-width: 701px) {
-  .submit-button {
-    font-size: 0.8em
+      width: 70%;
+      margin: 0 auto;
   }
 }
 

@@ -36,7 +36,7 @@
   background-color: #dddddd42;
 }
 
-.teams-container, .games-container, .tournament-container, .rules-container, .team-management-container {
+.teams-container, .games-container, .tournament-container, .rules-container, .team-management-container, .settings-section {
   background-color: rgba(32, 32, 32, 0.6);
   padding: 0.5% 7.5%;
   margin: 2% 0%;
@@ -58,10 +58,6 @@
 .no-list-style {
   list-style-type: none;
   padding: 0;
-}
-
-.settings-section {
-  margin-top: 20px;
 }
 
 .button-group {
