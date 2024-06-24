@@ -28,6 +28,7 @@ const Header = ({ token, username, setToken }) => {
             <>
               <button onClick={() => navigate('/')} className="header-link">Strona główna</button>
               <button onClick={() => navigate('/teams')} className="header-link">Zespoły</button>
+              <button onClick={() => navigate('/players')} className="header-link">Zawodnicy</button>
             </>
           )}
         

@@ -93,25 +93,25 @@ const TournamentView = ({ token }) => {
           handleSubmit={handleSubmit}
         >
           <h2>Utwórz Turniej</h2>
-          <label className="form-label">
+          <label className="modal-form-label">
             Nazwa:
-            <input type="text" name="name" value={newTournament.name} onChange={handleInputChange} required className="form-input" />
+            <input type="text" name="name" value={newTournament.name} onChange={handleInputChange} required className="modal-form-input" />
           </label>
-          <label className="form-label">
+          <label className="modal-form-label">
             Data rozpoczęcia:
-            <input type="datetime-local" name="dateTime" value={newTournament.dateTime} onChange={handleInputChange} required className="form-input" />
+            <input type="datetime-local" name="dateTime" value={newTournament.dateTime} onChange={handleInputChange} required className="modal-form-input" />
           </label>
-          <label className="form-label">
+          <label className="modal-form-label">
             Miejscowość:
-            <input type="text" name="location" value={newTournament.location} onChange={handleInputChange} required className="form-input" />
+            <input type="text" name="location" value={newTournament.location} onChange={handleInputChange} required className="modal-form-input" />
           </label>
-          <label className="form-label">
+          <label className="modal-form-label">
             Ulica:
-            <input type="text" name="street" value={newTournament.street} onChange={handleInputChange} required className="form-input" />
+            <input type="text" name="street" value={newTournament.street} onChange={handleInputChange} required className="modal-form-input" />
           </label>
-          <label className="form-label">
+          <label className="modal-form-label">
             Dyscyplina:
-            <select name="sportId" value={newTournament.sportId} onChange={handleInputChange} required className="form-input">
+            <select name="sportId" value={newTournament.sportId} onChange={handleInputChange} required className="modal-form-input">
               <option value="">Wybierz dyscyplinę</option>
               {sports.map(sport => (
                 <option key={sport.id} value={sport.id}>{sport.sportName}</option>

@@ -328,7 +328,7 @@ const TournamentDetailView = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <button className="modal-close-button" onClick={() => setShowAddGameModal(false)}>&times;</button>
-            <h2>Dodaj Mecz</h2>
+            <h2>Dodaj mecz</h2>
             <form onSubmit={handleAddGameSubmit}>
               <label className="modal-form-label">
                 Data meczu:
@@ -365,7 +365,7 @@ const TournamentDetailView = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <button className="modal-close-button" onClick={() => setShowManageGameModal(false)}>&times;</button>
-            <h2>Zarządaj Mecz</h2>
+            <h2>Zarządaj meczem</h2>
             <form onSubmit={handleEditGameSubmit}>
               <label className="modal-form-label">
                 Data meczu:
@@ -394,7 +394,7 @@ const TournamentDetailView = () => {
                 <button type="button" onClick={() => setShowManageGameModal(false)} className="modal-btn modal-btn-dark-grey">Anuluj</button>
               </div>
             </form>
-            <h2>Ustaw Wynik</h2>
+            <h2>Ustaw wynik</h2>
             <form onSubmit={handleSetScoreSubmit}>
               <label className="modal-form-label">
                 {tournament.teamsList.find(team => team.id === manageGameData.homeTeamId)?.name}:
