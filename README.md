@@ -1,4 +1,4 @@
-# Tournament Tracker Web
+# TournamentTrackerWeb
 
 ### About
 
